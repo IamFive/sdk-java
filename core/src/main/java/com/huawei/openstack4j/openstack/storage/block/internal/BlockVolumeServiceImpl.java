@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
 import com.huawei.openstack4j.api.Apis;
@@ -39,13 +40,20 @@ import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolume.Volume
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeMigration;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeType;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
+import com.huawei.openstack4j.openstack.storage.block.domain.Extension.Extensions;
+import com.huawei.openstack4j.openstack.storage.block.domain.Version.Versions;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeUploadImage;
 import com.huawei.openstack4j.openstack.storage.block.domain.ExtendAction;
+import com.huawei.openstack4j.openstack.storage.block.domain.Extension;
 import com.huawei.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
 import com.huawei.openstack4j.openstack.storage.block.domain.ForceDetachAction;
 import com.huawei.openstack4j.openstack.storage.block.domain.ForceDetachConnector;
 import com.huawei.openstack4j.openstack.storage.block.domain.ResetStatusAction;
 import com.huawei.openstack4j.openstack.storage.block.domain.UpdateReadOnlyFlagAction;
+import com.huawei.openstack4j.openstack.storage.block.domain.Version;
+import com.huawei.openstack4j.openstack.storage.block.domain.VolumeMeta;
+import com.huawei.openstack4j.openstack.storage.block.domain.VolumeMetadata;
+import com.huawei.openstack4j.openstack.storage.block.options.VolumeListOptions;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -269,5 +277,88 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		ForceDetachConnector connector = new ForceDetachConnector(initiator);
 		ForceDetachAction detach = new ForceDetachAction(attachmentId, connector);
 		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(detach).execute();
+	}
+
+	@Override
+	public com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes volumes() {
+		return get(com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes.class, "/volumes").execute();
+	}
+
+	@Override
+	public com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes volumes(VolumeListOptions options) {
+		checkArgument(options != null, "`options` is required");
+		return get(com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes.class, "/volumes").params(options.getOptions()).execute();	}
+
+	@Override
+	public VolumeMetadata updateMetadata(String volumeId, VolumeMetadata metadata) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		checkArgument(metadata != null, "`metadata` is required");
+		return put(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId))
+				.param("metadata", metadata.getMetadata()).execute();
+	}
+
+	@Override
+	public ActionResponse deleteMetadata(String volumeId, String key) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		return deleteWithResponse(uri("/volumes/%s/metadata/%s", volumeId, key)).execute();
+	}
+
+	@Override
+	public VolumeMeta metadata(String volumeId, String key) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		return get(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key)).execute();
+	}
+
+	@Override
+	public VolumeMetadata createOrUpdateMetadata(String volumeId, VolumeMetadata metadata) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		checkArgument(metadata != null, "`metadata` is required");
+		return post(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId))
+				.param("metadata", metadata.getMetadata()).execute();
+	}
+
+	@Override
+	public VolumeMetadata metadata(String volumeId) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		return get(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).execute();
+	}
+
+	@Override
+	public VolumeMeta updateMetadata(String volumeId, String key, VolumeMeta metadata) {
+		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		checkArgument(metadata != null, "`metadata` is required");
+		return put(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key))
+				.param("meta", metadata.getMeta()).execute();
+	}
+
+	@Override
+	public List<? extends Extension> extensions() {
+		return get(Extensions.class, "/extensions").execute().getList();
+	}
+
+	@Override
+	public VolumeType type(String typeId) {
+		checkArgument(!Strings.isNullOrEmpty(typeId), "`typeId` should not be empty");
+		return get(CinderVolumeType.class, uri("/types/%s", typeId)).execute();
+	}
+
+	@Override
+	public List<? extends Version> versions() {
+		return get(Versions.class, "/").execute().getList();
+	}
+
+	@Override
+	public List<? extends Version> versionsV2() {
+		return get(Versions.class, "/v2").execute().getList();
+	}
+
+	@Override
+	public ActionResponse setBootable(String volumeId, boolean bootable) {
+		Map<String, Boolean> param = Maps.newHashMap();
+		param.put("bootable", bootable);
+		return postWithResponse(uri("/volumes/%s/action")).param("os-set_bootable", param).execute();
 	}
 }

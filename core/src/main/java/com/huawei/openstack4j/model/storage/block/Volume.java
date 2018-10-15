@@ -188,4 +188,54 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return current back-end of the volume.
      */
 	String host();
+	
+	/**
+	 * @return The URI of the EVS disk
+	 */
+	List<Map<String, String>> getLinks();
+	
+	/**
+	 * @return the time when the EVS disk information was updated
+	 */
+	Date getUpdated();
+	
+	/**
+	 * Reserved
+	 * @return
+	 */
+	String getExtendedStatus();
+	
+	/**
+	 * Reserved
+	 * @return
+	 */
+	String getReplicationStatus();
+	
+	/**
+	 * Reserved
+	 * @return
+	 */
+	String getGroupId();
+	
+	/**
+	 * Reserved
+	 * @return
+	 */
+	String getNameId();
+	
+	/**
+	 * @return whether the EVS disk is shareable
+	 */
+	Boolean getShareable();
+	
+	/**
+	 * Reserved
+	 * @return
+	 */
+	String getUserId();
+	
+	/**
+	 * @return the shared EVS disk information
+	 */
+	Boolean getMultiattach();
 }

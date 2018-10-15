@@ -43,6 +43,14 @@ public class CinderVolumeType implements VolumeType {
 
 	@JsonProperty("extra_specs")
 	private Map<String, String> extraSpecs;
+	
+	@JsonProperty("qos_specs_id")
+	private String qosSpecsId;
+
+	@JsonProperty("is_public")
+	private Boolean isPublic;
+	
+	private String description;
 
 	/**
 	 * {@inheritDoc}
@@ -87,6 +95,8 @@ public class CinderVolumeType implements VolumeType {
 	public String toString() {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("extras", extraSpecs)
+				     .add("qosSpecsId", qosSpecsId).add("isPublic", isPublic)
+				     .add("description", description)
 				     .toString();
 	}
 
@@ -139,5 +149,20 @@ public class CinderVolumeType implements VolumeType {
             return this;
         }
     }
+
+	@Override
+	public String getQosSpecsId() {
+		return qosSpecsId;
+	}
+
+	@Override
+	public Boolean isPublic() {
+		return isPublic;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
 
 }

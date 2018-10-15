@@ -15,17 +15,27 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.storage.block.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Strings;
 import com.huawei.openstack4j.api.Builders;
 import com.huawei.openstack4j.api.storage.BlockVolumeSnapshotService;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.storage.block.VolumeSnapshot;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot.VolumeSnapshots;
+import com.huawei.openstack4j.openstack.storage.block.domain.Snapshot;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotDetail.SnapshotDetails;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotMeta;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotMetadata;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotRollback;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotUpdate;
+import com.huawei.openstack4j.openstack.storage.block.options.SnapshotListOptions;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotDetail;
 
 /**
  * OpenStack (Cinder) Volume Snapshot Operations API Implementation.
@@ -103,6 +113,84 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 			}
 		}
 		return volumeInvocation;
+	}
+
+	@Override
+	public List<? extends SnapshotDetail> snapshots() {
+		return get(SnapshotDetails.class, "/snapshots/detail").execute().getList();
+	}
+
+	@Override
+	public List<? extends SnapshotDetail> snapshots(SnapshotListOptions options) {
+		checkNotNull(options, "`options` is required");
+		return get(SnapshotDetails.class, "/snapshots/detail").params(options.getOptions()).execute().getList();
+	}
+
+	@Override
+	public Snapshot create(Snapshot snapshot) {
+		checkNotNull(snapshot, "`snapshot` is required");
+		checkArgument(!Strings.isNullOrEmpty(snapshot.getVolumeId()), "`volumeId` is required");
+		return post(Snapshot.class, "/snapshots").param("snaphost", snapshot).execute();
+	}
+
+	@Override
+	public SnapshotRollback rollback(String snapshotId, SnapshotRollback rollback) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkNotNull(rollback, "`rollback` is required");
+		return post(SnapshotRollback.class, uri("/os-vendor-snapshots/%s/rollback", snapshotId))
+				.param("rollback", rollback).execute();
+	}
+
+	@Override
+	public SnapshotDetail update(String snapshotId, SnapshotUpdate snapshot) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkNotNull(snapshot, "`snapshot` is required");
+		return put(SnapshotDetail.class, uri("/snapshots/%s", snapshotId)).param("snapshot", snapshot).execute();
+	}
+
+	@Override
+	public SnapshotMetadata createMetadata(String snapshotId, SnapshotMetadata metadata) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkNotNull(metadata, "`metadata` is required");
+		return post(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId))
+				.param("metadata", metadata.getMetadata()).execute();
+	}
+
+	@Override
+	public SnapshotMetadata metadata(String snapshotId) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		return get(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).execute();
+	}
+
+	@Override
+	public SnapshotMetadata updateMetadata(String snapshotId, SnapshotMetadata metadata) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkNotNull(metadata, "`metadata` is required");
+		return put(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId))
+				.param("metadata", metadata.getMetadata()).execute();
+	}
+
+	@Override
+	public ActionResponse deleteMetadata(String snapshotId, String key) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		return deleteWithResponse(uri("/snapshots/%s/metadata/%s", snapshotId, key)).execute();
+	}
+
+	@Override
+	public SnapshotMeta metadata(String snapshotId, String key) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		return get(SnapshotMeta.class, uri("/snapshots/%s/metadata/%s", snapshotId, key)).execute();
+	}
+
+	@Override
+	public SnapshotMeta updateMetadata(String snapshotId, String key, SnapshotMeta metadata) {
+		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
+		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
+		checkNotNull(metadata, "`metadata` is required");
+		return put(SnapshotMeta.class, uri("/snapshots/%s/metadata/%s", snapshotId, key)).param("meta", metadata)
+				.execute();
 	}
 
 }

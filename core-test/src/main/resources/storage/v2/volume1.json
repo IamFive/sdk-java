@@ -1,0 +1,42 @@
+{
+    "volume": {
+        "attachments": [ ], 
+        "links": [
+            {
+                "href": "https://volume.az0.dc1.domainname.com/v2/40acc331ac784f34842ba4f08ff2be48/volumes/591ac654-26d8-41be-bb77-4f90699d2d41", 
+                "rel": "self"
+            }, 
+            {
+                "href": "https://volume.az0.dc1.domainname.com/40acc331ac784f34842ba4f08ff2be48/volumes/591ac654-26d8-41be-bb77-4f90699d2d41", 
+                "rel": "bookmark"
+            }
+        ], 
+        "availability_zone": "az1.dc1", 
+        "os-vol-host-attr:host": "az1.dc1#SSD", 
+        "encrypted": false, 
+        "multiattach": true, 
+        "updated_at": "2016-02-03T02:19:29.895237", 
+        "os-volume-replication:extended_status": null, 
+        "replication_status": "disabled", 
+        "snapshot_id": null, 
+        "id": "591ac654-26d8-41be-bb77-4f90699d2d41", 
+        "size": 40, 
+        "user_id": "fd03ee73295e45478d88e15263d2ee4e", 
+        "os-vol-tenant-attr:tenant_id": "40acc331ac784f34842ba4f08ff2be48", 
+        "volume_image_metadata": null, 
+        "os-vol-mig-status-attr:migstat": null, 
+        "metadata": {
+            "__openstack_region_name": "az1.dc1", 
+            "quantityGB": "40"
+        }, 
+        "status": "error_restoring", 
+        "description": "auto-created_from_restore_from_backup", 
+        "source_volid": null, 
+        "consistencygroup_id": null, 
+        "os-vol-mig-status-attr:name_id": null, 
+        "name": "restore_backup_0115efb3-678c-4a9e-bff6-d3cd278238b9", 
+        "bootable": "false", 
+        "created_at": "2016-02-03T02:19:11.723797", 
+        "volume_type": null
+    }
+}

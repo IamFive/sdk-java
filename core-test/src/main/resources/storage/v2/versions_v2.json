@@ -1,0 +1,32 @@
+{
+    "versions": [
+        {
+            "min_version": "", 
+            "media-types": [
+                {
+                    "type": "application/vnd.openstack.volume+json;version=1", 
+                    "base": "application/json"
+                }, 
+                {
+                    "type": "application/vnd.openstack.volume+xml;version=1", 
+                    "base": "application/xml"
+                }
+            ], 
+            "links": [
+                {
+                    "rel": "describedby", 
+                    "href": "http://docs.openstack.org/", 
+                    "type": "text/html"
+                }, 
+                {
+                    "rel": "self", 
+                    "href": "https://evs.localdomain.com/v2"
+                }
+            ], 
+            "id": "v2.0", 
+            "updated": "2014-06-28T12:20:21Z", 
+            "version": "", 
+            "status": "SUPPORTED"
+        }
+    ]
+}

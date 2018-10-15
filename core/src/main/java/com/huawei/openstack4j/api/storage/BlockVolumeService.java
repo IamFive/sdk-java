@@ -24,6 +24,12 @@ import com.huawei.openstack4j.model.storage.block.Volume;
 import com.huawei.openstack4j.model.storage.block.VolumeType;
 import com.huawei.openstack4j.model.storage.block.VolumeUploadImage;
 import com.huawei.openstack4j.model.storage.block.options.UploadImageData;
+import com.huawei.openstack4j.openstack.storage.block.domain.Extension;
+import com.huawei.openstack4j.openstack.storage.block.domain.Version;
+import com.huawei.openstack4j.openstack.storage.block.domain.VolumeMeta;
+import com.huawei.openstack4j.openstack.storage.block.domain.VolumeMetadata;
+import com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes;
+import com.huawei.openstack4j.openstack.storage.block.options.VolumeListOptions;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -198,4 +204,113 @@ public interface BlockVolumeService extends RestService {
 	 * @return
 	 */
 	ActionResponse forceDetach(String volumeId, String initiator,String attachmentId  );
+
+	/**
+	 * Querying EVS Disks
+	 * 
+	 * @return
+	 */
+	Volumes volumes();
+
+	/**
+	 * Querying EVS Disks
+	 * 
+	 * @param options
+	 * @return
+	 */
+	Volumes volumes(VolumeListOptions options);
+
+	/**
+	 * Updating Metadata of an EVS Disk
+	 * 
+	 * @param volumeId
+	 * @param metadata
+	 * @return
+	 */
+	VolumeMetadata updateMetadata(String volumeId, VolumeMetadata metadata);
+
+	/**
+	 * Deleting One Piece of EVS Disk Metadata
+	 * 
+	 * @param volumeId
+	 * @param key
+	 * @return
+	 */
+	ActionResponse deleteMetadata(String volumeId, String key);
+
+	/**
+	 * Querying One Piece of EVS Disk Metadata
+	 * 
+	 * @param volumeId
+	 * @param key
+	 * @return
+	 */
+	VolumeMeta metadata(String volumeId, String key);
+
+	/**
+	 * Adding or Updating Metadata of an EVS Disk
+	 * 
+	 * @param volumeId
+	 * @return
+	 */
+	VolumeMetadata createOrUpdateMetadata(String volumeId, VolumeMetadata metadata);
+
+	/**
+	 * Querying Metadata of an EVS Disk
+	 * 
+	 * @param volumeId
+	 * @return
+	 */
+	VolumeMetadata metadata(String volumeId);
+
+	/**
+	 * Updating One Piece of EVS Disk Metadata
+	 * 
+	 * @param volumeId
+	 * @param key
+	 *            Specifies the key of the metadata that requires the update
+	 * @param metadata
+	 *            Specifies the piece of the disk metadata, which is made up of a
+	 *            key-value pair
+	 * @return
+	 */
+	VolumeMeta updateMetadata(String volumeId, String key, VolumeMeta metadata);
+
+	/**
+	 * Querying API Extensions
+	 * 
+	 * @return
+	 */
+	List<? extends Extension> extensions();
+
+	/**
+	 * Querying Details About an EVS Disk Type
+	 * 
+	 * @param typeId
+	 * @return
+	 */
+	VolumeType type(String typeId);
+
+	/**
+	 * Querying API Versions
+	 * 
+	 * @return
+	 */
+	List<? extends Version> versions();
+
+	/**
+	 * Querying API Versions (v2)
+	 * 
+	 * @return
+	 */
+	List<? extends Version> versionsV2();
+	
+	/**
+	 * Configuring Bootable for an EVS Disk
+	 * 
+	 * @param volumeId
+	 * @param bootable
+	 * @return
+	 */
+	ActionResponse setBootable(String volumeId, boolean bootable);
 }

@@ -79,6 +79,31 @@ public class CinderVolume implements Volume {
 	private Boolean encrypted;
 	@JsonProperty("os-vol-host-attr:host")
 	private String host;
+	
+	@JsonProperty("updated_at")
+	private Date updated;
+	
+	private List<Map<String, String>> links;
+	
+	@JsonProperty("os-volume-replication:extended_status")
+	private String extendedStatus;
+	
+	@JsonProperty("replication_status")
+	private String replicationStatus;
+	
+	@JsonProperty("consistencygroup_id")
+	private String groupId;
+	
+	@JsonProperty("os-vol-mig-status-attr:name_id")
+	private String nameId;
+	
+	private Boolean shareable;
+	
+	@JsonProperty("user_id")
+	private String userId;
+	
+	private Boolean multiattach;
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -261,6 +286,10 @@ public class CinderVolume implements Volume {
 				     .add("volumeType", volumeType).add("imageRef", getImageRef())
 				     .add("sourceVolid", sourceVolid).add("snapshotId", snapshotId).add("metadata", metadata)
 				     .add("bootable", bootable).add("imageMetadata", imageMetadata)
+				     .add("links", links).add("updated", updated).add("extendedStatus", extendedStatus)
+				     .add("replicationStatus", replicationStatus).add("groupId", groupId)
+				     .add("nameId", nameId).add("shareable", shareable)
+				     .add("userId", userId).add("multiattach", multiattach)
 				     .toString();
 	}
 
@@ -365,5 +394,50 @@ public class CinderVolume implements Volume {
             m.zone = zone;
             return this;
         }
+	}
+
+	@Override
+	public List<Map<String, String>> getLinks() {
+		return links;
+	}
+
+	@Override
+	public Date getUpdated() {
+		return updated;
+	}
+
+	@Override
+	public String getExtendedStatus() {
+		return extendedStatus;
+	}
+
+	@Override
+	public String getReplicationStatus() {
+		return replicationStatus;
+	}
+
+	@Override
+	public String getGroupId() {
+		return groupId;
+	}
+
+	@Override
+	public String getNameId() {
+		return nameId;
+	}
+
+	@Override
+	public Boolean getShareable() {
+		return shareable;
+	}
+
+	@Override
+	public String getUserId() {
+		return userId;
+	}
+
+	@Override
+	public Boolean getMultiattach() {
+		return multiattach;
 	}
 }

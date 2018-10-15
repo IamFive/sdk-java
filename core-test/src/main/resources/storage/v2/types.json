@@ -1,0 +1,43 @@
+{ 
+    "volume_types": [ 
+        { 
+            "extra_specs": { 
+                "volume_backend_name": "SAS",  
+                "availability-zone": "az1.dc1",  
+                "RESKEY:availability_zone": "az1.dc1,az2.dc2",  
+                "os-vendor-extended:sold_out_availability_zones": "az2.dc2" 
+            },  
+            "name": "SAS",  
+            "qos_specs_id": null,  
+            "id": "6c81c680-df58-4512-81e7-ecf66d160638",  
+            "is_public": true,  
+            "description": null 
+        },  
+        { 
+            "extra_specs": { 
+                "volume_backend_name": "SATA",  
+                "availability-zone": "az1.dc1",  
+                "RESKEY:availability_zone": "az1.dc1,az2.dc2",  
+                "os-vendor-extended:sold_out_availability_zones": "az2.dc2"  
+            },  
+            "name": "SATA",  
+            "qos_specs_id": "585f29d6-7147-42e7-bfb8-ca214f640f6f",  
+            "is_public": true,  
+            "id": "ea6e3c13-aac5-46e0-b280-745ed272e662",  
+            "description": null 
+        },  
+        { 
+            "extra_specs": { 
+                "volume_backend_name": "SSD",  
+                "availability-zone": "az1.dc1",  
+                "RESKEY:availability_zone": "az1.dc1,az2.dc2",  
+                "os-vendor-extended:sold_out_availability_zones": "az2.dc2"
+            },  
+            "name": "SSD",  
+            "qos_specs_id": "39b0c29a-308b-4f86-b478-5d3d02a43837",  
+            "is_public": true,  
+            "id": "6f2dee9e-82f0-4be3-ad89-bae605a3d24f",  
+            "description": null 
+        } 
+    ] 
+}

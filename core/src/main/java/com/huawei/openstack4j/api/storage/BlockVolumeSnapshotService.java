@@ -21,6 +21,13 @@ import java.util.Map;
 import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.storage.block.VolumeSnapshot;
+import com.huawei.openstack4j.openstack.storage.block.domain.Snapshot;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotDetail;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotMeta;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotMetadata;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotRollback;
+import com.huawei.openstack4j.openstack.storage.block.domain.SnapshotUpdate;
+import com.huawei.openstack4j.openstack.storage.block.options.SnapshotListOptions;
 
 /**
  * OpenStack (Cinder) Volume Snapshot Operations API.
@@ -79,5 +86,99 @@ public interface BlockVolumeSnapshotService extends RestService {
 	 * @return the newly created snapshot
 	 */
 	VolumeSnapshot create(VolumeSnapshot snapshot);
-	
+
+	/**
+	 * Querying Details About EVS Snapshots
+	 * 
+	 * @return
+	 */
+	List<? extends SnapshotDetail> snapshots();
+
+	/**
+	 * Querying Details About EVS Snapshots
+	 * 
+	 * @param options
+	 * @return
+	 */
+	List<? extends SnapshotDetail> snapshots(SnapshotListOptions options);
+
+	/**
+	 * Creating an EVS Snapshot
+	 * 
+	 * @param snapshot
+	 * @return
+	 */
+	Snapshot create(Snapshot snapshot);
+
+	/**
+	 * Rolling Back a Snapshot to an EVS Disk
+	 * 
+	 * @param snapshotId
+	 * @param rollback
+	 * @return
+	 */
+	SnapshotRollback rollback(String snapshotId, SnapshotRollback rollback);
+
+	/**
+	 * Updating an EVS Snapshot
+	 * 
+	 * @param snapshotId
+	 * @param snapshot
+	 * @return
+	 */
+	SnapshotDetail update(String snapshotId, SnapshotUpdate snapshot);
+
+	/**
+	 * Adding Metadata of an EVS Snapshot
+	 * 
+	 * @param snapshotId
+	 * @param metadata
+	 * @return
+	 */
+	SnapshotMetadata createMetadata(String snapshotId, SnapshotMetadata metadata);
+
+	/**
+	 * Querying Metadata of an EVS Snapshot
+	 * 
+	 * @param snapshotId
+	 * @return
+	 */
+	SnapshotMetadata metadata(String snapshotId);
+
+	/**
+	 * Updating Metadata of an EVS Snapshot
+	 * 
+	 * @param snapshotId
+	 * @param metadata
+	 * @return
+	 */
+	SnapshotMetadata updateMetadata(String snapshotId, SnapshotMetadata metadata);
+
+	/**
+	 * Deleting One Piece of EVS Snapshot Metadata
+	 * 
+	 * @param snapshotId
+	 * @param key
+	 * @return
+	 */
+	ActionResponse deleteMetadata(String snapshotId, String key);
+
+	/**
+	 * Querying One Piece of EVS Snapshot Metadata
+	 * 
+	 * @param snapshotId
+	 * @param key
+	 * @return
+	 */
+	SnapshotMeta metadata(String snapshotId, String key);
+
+	/**
+	 * Updating One Piece of EVS Snapshot Metadata
+	 * 
+	 * @param snapshotId
+	 * @param key
+	 * @param metadata
+	 * @return
+	 */
+	SnapshotMeta updateMetadata(String snapshotId, String key, SnapshotMeta metadata);
 }

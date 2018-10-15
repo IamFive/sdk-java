@@ -19,6 +19,7 @@ import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.storage.block.BlockQuotaSet;
 import com.huawei.openstack4j.model.storage.block.BlockQuotaSetUsage;
+import com.huawei.openstack4j.openstack.storage.block.domain.QuotaSet;
 
 /**
  * Quota-Set Extension API for Block Storage
@@ -76,5 +77,12 @@ public interface BlockQuotaSetService extends RestService {
      * @return the quota usage details
      */
     BlockQuotaSetUsage usageForUser(String tenantId, String userId);
+
+	/**
+	 * Querying Details of Tenant Quotas
+	 * 
+	 * @return
+	 */
+    QuotaSet get();
     
 }

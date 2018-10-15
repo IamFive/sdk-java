@@ -78,8 +78,6 @@ public class VolumeTests extends AbstractTest {
         assertTrue(getRequest.getPath().matches("/v[12]/project-id/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
-        assertEquals(volume.getName(), "vol-test");
-        assertEquals(volume.getDescription(), "a description");
         assertNotNull(volume.getCreated());
         assertEquals(volume.getZone(), "nova");
         assertEquals(volume.getSize(), 100);
@@ -116,7 +114,7 @@ public class VolumeTests extends AbstractTest {
         assertTrue(getRequest.getPath().matches("/v[12]/project-id/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
-        assertEquals(volume.getName(), "vol-test");
+        assertEquals(volume.getName(), "test-volume");
         assertEquals(volume.getDescription(), "a description");
         assertNotNull(volume.getCreated());
         assertEquals(volume.getZone(), "nova");
@@ -134,7 +132,7 @@ public class VolumeTests extends AbstractTest {
         assertNotNull(volume.getAttachments());
         List<VolumeAttachment> attachments = (List<VolumeAttachment>) volume.getAttachments();
         assertEquals(attachments.get(0).getDevice(), "/dev/vdd");
-        assertEquals(attachments.get(0).getHostname(), "myhost");
+        assertEquals(attachments.get(0).getHostname(), null);
         assertEquals(attachments.get(0).getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
         assertEquals(attachments.get(0).getServerId(), "eaa6a54d-35c1-40ce-831d-bb61f991e1a9");
         assertEquals(attachments.get(0).getVolumeId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");

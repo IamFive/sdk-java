@@ -23,6 +23,7 @@ import com.huawei.openstack4j.model.storage.block.BlockQuotaSet;
 import com.huawei.openstack4j.model.storage.block.BlockQuotaSetUsage;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSetUsage;
+import com.huawei.openstack4j.openstack.storage.block.domain.QuotaSet;
 
 /**
  * Quota-Set Extension API for Block Storage
@@ -86,5 +87,10 @@ public class BlockQuotaSetServiceImpl extends BaseBlockStorageServices implement
                    .param("usage", true)
                    .execute();
     }
+
+	@Override
+	public QuotaSet get() {
+		return get(QuotaSet.class, "/os-quota-sets/%(project_id)s").param("usage", "True").execute();
+	}
 
 }

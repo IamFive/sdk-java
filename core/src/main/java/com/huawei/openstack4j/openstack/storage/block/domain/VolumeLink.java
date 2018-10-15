@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2018 Huawei Technologies Co., Ltd.                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,52 +13,24 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.model.storage.block;
+package com.huawei.openstack4j.openstack.storage.block.domain;
 
-import java.util.Map;
-
-import com.huawei.openstack4j.common.Buildable;
 import com.huawei.openstack4j.model.ModelEntity;
-import com.huawei.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
 
-/**
- * The volume type defines the characteristics of a volume. It usually maps to a set of capabilities
- * of the storage back-end driver to be used for this volume. 
- * Examples: "Performance", "SSD", "Backup", etc. 
- * 
- * @author Jeremy Unruh
- */
-public interface VolumeType extends ModelEntity, Buildable<VolumeTypeBuilder> {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-	/**
-	 * @return the identifier for the volume type
-	 */
-	String getId();
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class VolumeLink implements ModelEntity {
+
+	private static final long serialVersionUID = -9081696428199451871L;
 	
-	/**
-	 * @return the name of the volume type
-	 */
-	String getName();
+	private String href;
 	
-	/**
-	 * @return the extra specifications (meta-data) associated with the volume type
-	 */
-	Map<String, String> getExtraSpecs();
-	
-	/**
-	 * @return the Quality of Service (QoS) ID of the EVS disk type
-	 */
-	String getQosSpecsId();
-	
-	/**
-	 * @return whether the EVS disk type is public
-	 */
-	Boolean isPublic();
-	
-	/**
-	 * @return the description of the EVS disk type
-	 */
-	String getDescription();
-	
-	
+	private String ref;
 }
