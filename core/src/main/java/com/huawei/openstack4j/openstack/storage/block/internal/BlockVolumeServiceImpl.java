@@ -56,7 +56,8 @@ import com.huawei.openstack4j.openstack.storage.block.domain.VolumeMetadata;
 import com.huawei.openstack4j.openstack.storage.block.options.VolumeListOptions;
 
 /**
- * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
+ * Manages Volumes and Volume Type based operations against Block Storage
+ * (Cinder)
  *
  * @author Jeremy Unruh
  */
@@ -237,10 +238,13 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	}
 
 	/**
-	 * <p>Description:Attach volume to a server</p>
-	 * Volume status must be available.
-	 * You should set instanceId or hostName.
-	 * <p>Author:Wang Ting/王婷</p>
+	 * <p>
+	 * Description:Attach volume to a server
+	 * </p>
+	 * Volume status must be available. You should set instanceId or hostName.
+	 * <p>
+	 * Author:Wang Ting/王婷
+	 * </p>
 	 *
 	 * @param volumeId
 	 * @param instanceId
@@ -259,15 +263,20 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	}
 
 	/**
-	 * <p>Description:Force detach a volume</p>
-	 * <p>Author:Wang Ting/王婷</p>
+	 * <p>
+	 * Description:Force detach a volume
+	 * </p>
+	 * <p>
+	 * Author:Wang Ting/王婷
+	 * </p>
 	 *
 	 * @param volumeId
 	 * @param initiator
 	 * @param attachmentId
 	 * @return
 	 * @Title: forceDetach
-	 * @see com.huawei.openstack4j.api.storage.BlockVolumeService#forceDetach(java.lang.String, java.lang.String, java.lang.String)
+	 * @see com.huawei.openstack4j.api.storage.BlockVolumeService#forceDetach(java.lang.String,
+	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
 	public ActionResponse forceDetach(String volumeId, String initiator, String attachmentId) {
@@ -287,14 +296,15 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	@Override
 	public com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes volumes(VolumeListOptions options) {
 		checkArgument(options != null, "`options` is required");
-		return get(com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes.class, "/volumes").params(options.getOptions()).execute();	}
+		return get(com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes.class, "/volumes")
+				.params(options.getOptions()).execute();
+	}
 
 	@Override
 	public VolumeMetadata updateMetadata(String volumeId, VolumeMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
 		checkArgument(metadata != null, "`metadata` is required");
-		return put(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId))
-				.param("metadata", metadata.getMetadata()).execute();
+		return put(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).entity(metadata).execute();
 	}
 
 	@Override
@@ -315,8 +325,7 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	public VolumeMetadata createOrUpdateMetadata(String volumeId, VolumeMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
 		checkArgument(metadata != null, "`metadata` is required");
-		return post(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId))
-				.param("metadata", metadata.getMetadata()).execute();
+		return post(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).entity(metadata).execute();
 	}
 
 	@Override
@@ -330,8 +339,7 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
 		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
 		checkArgument(metadata != null, "`metadata` is required");
-		return put(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key))
-				.param("meta", metadata.getMeta()).execute();
+		return put(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key)).entity(metadata).execute();
 	}
 
 	@Override
@@ -357,8 +365,10 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 
 	@Override
 	public ActionResponse setBootable(String volumeId, boolean bootable) {
-		Map<String, Boolean> param = Maps.newHashMap();
-		param.put("bootable", bootable);
-		return postWithResponse(uri("/volumes/%s/action")).param("os-set_bootable", param).execute();
+		Map<String, Boolean> map = Maps.newHashMap();
+		map.put("bootable", bootable);
+		Map<String, Object> param = Maps.newHashMap();
+		param.put("os-set_bootable", map);
+		return postWithResponse(uri("/volumes/%s/action", volumeId)).entity(param).execute();
 	}
 }
