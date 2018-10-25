@@ -50,7 +50,7 @@ public class EVSVolumeTest extends AbstractTest {
 	private static final String META_VAL = "value1";
 
 	@BeforeClass
-	public void testCreateVolume() {
+	public void setUp() {
 		List<? extends AvailabilityZone> zones = osclient.blockStorage().zones().list();
 		AvailabilityZone zone = null;
 		for (AvailabilityZone az : zones) {
@@ -76,7 +76,7 @@ public class EVSVolumeTest extends AbstractTest {
 	}
 
 	@AfterClass
-	public void testDeleteVolume() {
+	public void teardown() {
 		ActionResponse delete = osclient.blockStorage().volumes().delete(volumeId);
 		assertTrue(delete.isSuccess());
 
@@ -185,7 +185,7 @@ public class EVSVolumeTest extends AbstractTest {
 
 		Status volumeStatus = (Status) this.retry(retry);
 		if (volumeStatus == null || !Status.AVAILABLE.equals(volumeStatus)) {
-			throw new RuntimeException(String.format("[%s]Volume is not availably", volumeId));
+			throw new RuntimeException(String.format("[%s]Volume is not available", volumeId));
 		}
 	}
 }

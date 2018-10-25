@@ -16,6 +16,7 @@
 package com.huawei.openstack4j.openstack.storage.block.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.huawei.openstack4j.model.ModelEntity;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonRootName("snapshot")
 public class SnapshotUpdate implements ModelEntity {
 	
 	private static final long serialVersionUID = -8178863629502081753L;

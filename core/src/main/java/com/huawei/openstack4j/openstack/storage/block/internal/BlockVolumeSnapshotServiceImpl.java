@@ -85,12 +85,11 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	@Override
 	public ActionResponse update(String snapshotId, String name, String description) {
 		checkNotNull(snapshotId);
-		if (name == null && description == null) 
-		    return ActionResponse.actionFailed("Both Name and Description are required", 412);
-		
+		if (name == null && description == null)
+			return ActionResponse.actionFailed("Both Name and Description are required", 412);
+
 		return put(ActionResponse.class, uri("/snapshots/%s", snapshotId))
-    		   .entity(Builders.volumeSnapshot().name(name).description(description).build())
-    		   .execute();
+				.entity(Builders.volumeSnapshot().name(name).description(description).build()).execute();
 	}
 
 	/**
@@ -130,30 +129,29 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	public Snapshot create(Snapshot snapshot) {
 		checkNotNull(snapshot, "`snapshot` is required");
 		checkArgument(!Strings.isNullOrEmpty(snapshot.getVolumeId()), "`volumeId` is required");
-		return post(Snapshot.class, "/snapshots").param("snaphost", snapshot).execute();
+		return post(Snapshot.class, "/snapshots").entity(snapshot).execute();
 	}
 
 	@Override
 	public SnapshotRollback rollback(String snapshotId, SnapshotRollback rollback) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		checkNotNull(rollback, "`rollback` is required");
-		return post(SnapshotRollback.class, uri("/os-vendor-snapshots/%s/rollback", snapshotId))
-				.param("rollback", rollback).execute();
+		return post(SnapshotRollback.class, uri("/os-vendor-snapshots/%s/rollback", snapshotId)).entity(rollback)
+				.execute();
 	}
 
 	@Override
 	public SnapshotDetail update(String snapshotId, SnapshotUpdate snapshot) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		checkNotNull(snapshot, "`snapshot` is required");
-		return put(SnapshotDetail.class, uri("/snapshots/%s", snapshotId)).param("snapshot", snapshot).execute();
+		return put(SnapshotDetail.class, uri("/snapshots/%s", snapshotId)).entity(snapshot).execute();
 	}
 
 	@Override
 	public SnapshotMetadata createMetadata(String snapshotId, SnapshotMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		checkNotNull(metadata, "`metadata` is required");
-		return post(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId))
-				.param("metadata", metadata.getMetadata()).execute();
+		return post(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).entity(metadata).execute();
 	}
 
 	@Override
@@ -166,8 +164,7 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	public SnapshotMetadata updateMetadata(String snapshotId, SnapshotMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		checkNotNull(metadata, "`metadata` is required");
-		return put(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId))
-				.param("metadata", metadata.getMetadata()).execute();
+		return put(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).entity(metadata).execute();
 	}
 
 	@Override
@@ -189,8 +186,7 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		checkArgument(!Strings.isNullOrEmpty(key), "`key` should not be empty");
 		checkNotNull(metadata, "`metadata` is required");
-		return put(SnapshotMeta.class, uri("/snapshots/%s/metadata/%s", snapshotId, key)).param("meta", metadata)
-				.execute();
+		return put(SnapshotMeta.class, uri("/snapshots/%s/metadata/%s", snapshotId, key)).entity(metadata).execute();
 	}
 
 }
