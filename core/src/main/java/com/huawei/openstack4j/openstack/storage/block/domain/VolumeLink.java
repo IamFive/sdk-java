@@ -22,6 +22,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Volume link mode
+ * @author bill
+ *
+ */
 @Getter
 @ToString
 @NoArgsConstructor

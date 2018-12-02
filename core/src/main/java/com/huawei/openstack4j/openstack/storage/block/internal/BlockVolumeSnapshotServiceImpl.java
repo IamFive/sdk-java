@@ -129,11 +129,17 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return volumeInvocation;
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public List<? extends SnapshotDetail> snapshots() {
 		return get(SnapshotDetails.class, "/snapshots/detail").execute().getList();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public List<? extends SnapshotDetail> snapshots(SnapshotListOptions options) {
 		checkNotNull(options, "`options` is required");
@@ -147,6 +153,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return post(Snapshot.class, "/snapshots").entity(snapshot).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotRollback rollback(String snapshotId, SnapshotRollback rollback) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -155,6 +164,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 				.execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotDetail update(String snapshotId, SnapshotUpdate snapshot) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -162,6 +174,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return put(SnapshotDetail.class, uri("/snapshots/%s", snapshotId)).entity(snapshot).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotMetadata createMetadata(String snapshotId, SnapshotMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -169,12 +184,18 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return post(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).entity(metadata).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotMetadata metadata(String snapshotId) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
 		return get(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotMetadata updateMetadata(String snapshotId, SnapshotMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -182,6 +203,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return put(SnapshotMetadata.class, uri("/snapshots/%s/metadata", snapshotId)).entity(metadata).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public ActionResponse deleteMetadata(String snapshotId, String key) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -189,6 +213,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return deleteWithResponse(uri("/snapshots/%s/metadata/%s", snapshotId, key)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotMeta metadata(String snapshotId, String key) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");
@@ -196,6 +223,9 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		return get(SnapshotMeta.class, uri("/snapshots/%s/metadata/%s", snapshotId, key)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public SnapshotMeta updateMetadata(String snapshotId, String key, SnapshotMeta metadata) {
 		checkArgument(!Strings.isNullOrEmpty(snapshotId), "`snapshotId` should not be empty");

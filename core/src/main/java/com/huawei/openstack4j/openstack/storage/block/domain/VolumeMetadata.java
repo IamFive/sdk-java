@@ -25,6 +25,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Volume metadata model with 'metadata' as name
+ * @author bill
+ *
+ */
 @Getter
 @ToString
 @Builder

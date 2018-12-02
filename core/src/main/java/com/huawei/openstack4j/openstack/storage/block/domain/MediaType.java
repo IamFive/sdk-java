@@ -23,6 +23,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Volume version media type model
+ * @author bill
+ *
+ */
 @Getter
 @ToString
 @Builder

@@ -210,12 +210,18 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return post(CinderVolumeType.class, uri("/types")).entity(volumeType).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy) {
 		CinderVolumeMigration migration = new CinderVolumeMigration(hostService, forceHostCopy);
 		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(migration).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeUploadImage uploadToImage(String volumeId, UploadImageData data) {
 		checkNotNull(volumeId, "volumeId");
@@ -225,6 +231,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 				.entity(CinderUploadImageData.create(data)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public BlockVolumeTransferService transfer() {
 		return Apis.get(BlockVolumeTransferService.class);
@@ -303,11 +312,17 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(detach).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes volumes() {
 		return get(com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes.class, "/volumes").execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public com.huawei.openstack4j.openstack.storage.block.domain.Volume.Volumes volumes(VolumeListOptions options) {
 		checkArgument(options != null, "`options` is required");
@@ -315,6 +330,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 				.params(options.getOptions()).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeMetadata updateMetadata(String volumeId, VolumeMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
@@ -322,6 +340,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return put(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).entity(metadata).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public ActionResponse deleteMetadata(String volumeId, String key) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
@@ -329,6 +350,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return deleteWithResponse(uri("/volumes/%s/metadata/%s", volumeId, key)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeMeta metadata(String volumeId, String key) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
@@ -336,6 +360,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return get(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeMetadata createOrUpdateMetadata(String volumeId, VolumeMetadata metadata) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
@@ -343,12 +370,18 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return post(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).entity(metadata).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeMetadata metadata(String volumeId) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
 		return get(VolumeMetadata.class, uri("/volumes/%s/metadata", volumeId)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeMeta updateMetadata(String volumeId, String key, VolumeMeta metadata) {
 		checkArgument(!Strings.isNullOrEmpty(volumeId), "`volumeId` should not be empty");
@@ -357,27 +390,42 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return put(VolumeMeta.class, uri("/volumes/%s/metadata/%s", volumeId, key)).entity(metadata).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public List<? extends Extension> extensions() {
 		return get(Extensions.class, "/extensions").execute().getList();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public VolumeType type(String typeId) {
 		checkArgument(!Strings.isNullOrEmpty(typeId), "`typeId` should not be empty");
 		return get(CinderVolumeType.class, uri("/types/%s", typeId)).execute();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public List<? extends Version> versions() {
 		return get(Versions.class, "/").execute().getList();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public List<? extends Version> versionsV2() {
 		return get(Versions.class, "/v2").execute().getList();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public ActionResponse setBootable(String volumeId, boolean bootable) {
 		Map<String, Boolean> map = Maps.newHashMap();

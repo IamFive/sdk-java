@@ -31,6 +31,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Volume snapshot detail model
+ * @author bill
+ *
+ */
 @Getter
 @ToString
 @Builder
