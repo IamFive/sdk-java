@@ -89,8 +89,8 @@ public class QuotaSet implements ModelEntity {
 	private Detail volumesSSD;
 
 	/**
-	 * The number of snapshots. This parameter is made up of key-value
-	 * pairs which include reserved, limit, and in_use.
+	 * The number of snapshots. This parameter is made up of key-value pairs which
+	 * include reserved, limit, and in_use.
 	 */
 	private Detail snapshots;
 
@@ -109,8 +109,8 @@ public class QuotaSet implements ModelEntity {
 	private Detail snapshotsSSD;
 
 	/**
-	 * The number of EVS disks. This parameter is made up of key-value
-	 * pairs which include reserved, limit, and in_use.
+	 * The number of EVS disks. This parameter is made up of key-value pairs which
+	 * include reserved, limit, and in_use.
 	 */
 	private Detail volumes;
 
@@ -122,8 +122,8 @@ public class QuotaSet implements ModelEntity {
 	private Detail gigabytesSATA;
 
 	/**
-	 * The number of backups. This parameter is made up of key-value pairs
-	 * which include reserved, limit, and in_use.
+	 * The number of backups. This parameter is made up of key-value pairs which
+	 * include reserved, limit, and in_use.
 	 */
 	private Detail backups;
 
@@ -143,9 +143,10 @@ public class QuotaSet implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public class Detail {
+	public static class Detail {
 		/**
 		 * Reserved size
 		 */
