@@ -41,18 +41,41 @@ public class Extension implements ModelEntity {
 
 	private static final long serialVersionUID = 100771135891961931L;
 
+	/**
+	 * The last update time
+	 */
 	private String updated;
 
+	/**
+	 * The description
+	 */
 	private String descrption;
 
+	/**
+	 * The link for the disk transfer.
+	 */
 	private List<Link> links;
 
+	/**
+	 * The name-space of the extension
+	 */
 	private String namespace;
 
+	/**
+	 * The alias of the extension.
+	 */
 	private String alias;
 
+	/**
+	 * The name of the disk transfer.
+	 */
 	private String name;
 
+	/**
+	 * List of extension
+	 * @author bill
+	 *
+	 */
 	@Getter
 	@ToString
 	@Builder

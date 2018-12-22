@@ -27,6 +27,7 @@ import lombok.ToString;
 
 /**
  * Volume quota set model
+ * 
  * @author bill
  *
  */
@@ -40,43 +41,103 @@ public class QuotaSet implements ModelEntity {
 
 	private static final long serialVersionUID = -5125142937410327024L;
 
+	/**
+	 * The tenant ID.
+	 */
 	private String id;
 
+	/**
+	 * The size (GB) reserved for SAS volume. This parameter is made up of key-value
+	 * pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("gigabytes_SAS")
 	private Detail gigabytesSAS;
 
+	/**
+	 * The number of EVS disks reserved for SATA volume. This parameter is made up
+	 * of key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("volumes_SATA")
 	private Detail volumesSATA;
 
+	/**
+	 * The total size (GB) of EVS disks and snapshots allowed by the quota. This
+	 * parameter is made up of key-value pairs which include reserved, limit, and
+	 * in_use.
+	 */
 	private Detail gigabytes;
 
+	/**
+	 * The backup size (GB). This parameter is made up of key-value pairs which
+	 * include reserved, limit, and in_use.
+	 */
 	@JsonProperty("backup_gigabytes")
 	private Detail backupGigabytes;
 
+	/**
+	 * The number of snapshots reserved for SAS volume. This parameter is made up of
+	 * key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("snapshots_SAS")
 	private Detail snapshotsSAS;
 
+	/**
+	 * The number of EVS disks reserved for SSD volume. This parameter is made up of
+	 * key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("volumes_SSD")
 	private Detail volumesSSD;
 
+	/**
+	 * The number of snapshots. This parameter is made up of key-value
+	 * pairs which include reserved, limit, and in_use.
+	 */
 	private Detail snapshots;
 
+	/**
+	 * The number of EVS disks reserved for SAS volume. This parameter is made up of
+	 * key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("volumes_SAS")
 	private Detail volumesSAS;
 
+	/**
+	 * The number of snapshots reserved for SSD volume. This parameter is made up of
+	 * key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("snapshots_SSD")
 	private Detail snapshotsSSD;
 
+	/**
+	 * The number of EVS disks. This parameter is made up of key-value
+	 * pairs which include reserved, limit, and in_use.
+	 */
 	private Detail volumes;
 
+	/**
+	 * The size (GB) reserved for SATA volume. This parameter is made up of
+	 * key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("gigabytes_SATA")
 	private Detail gigabytesSATA;
 
+	/**
+	 * The number of backups. This parameter is made up of key-value pairs
+	 * which include reserved, limit, and in_use.
+	 */
 	private Detail backups;
 
+	/**
+	 * The size (GB) reserved for SSD volume. This parameter is made up of key-value
+	 * pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("gigabytes_SSD")
 	private Detail gigabytesSSD;
 
+	/**
+	 * The number of snapshots reserved for SATA volume. This parameter is made up
+	 * of key-value pairs which include reserved, limit, and in_use.
+	 */
 	@JsonProperty("snapshots_SATA")
 	private Detail snapshotsSATA;
 
@@ -85,8 +146,19 @@ public class QuotaSet implements ModelEntity {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public class Detail {
+		/**
+		 * Reserved size
+		 */
 		private Integer reserved;
+
+		/**
+		 * Limit size
+		 */
 		private Integer limit;
+
+		/**
+		 * In-use size
+		 */
 		@JsonProperty("in_use")
 		private Integer inUse;
 	}

@@ -27,6 +27,7 @@ import lombok.ToString;
 
 /**
  * Volume snapshot metadata model with 'meta' as name
+ * 
  * @author bill
  *
  */
@@ -36,8 +37,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SnapshotMeta implements ModelEntity {
-	
+
 	private static final long serialVersionUID = -1042377648264033769L;
-	
+
+	/**
+	 * The piece of the disk snapshot metadata, which is made up of a
+	 * key-value pair.
+	 */
 	private Map<String, String> meta;
 }

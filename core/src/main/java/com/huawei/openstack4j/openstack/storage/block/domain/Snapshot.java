@@ -29,6 +29,7 @@ import lombok.ToString;
 
 /**
  * Volume snapshot model
+ * 
  * @author bill
  *
  */
@@ -42,14 +43,36 @@ public class Snapshot implements ModelEntity {
 
 	private static final long serialVersionUID = -2566970864787489914L;
 
+	/**
+	 * The UUID of the source EVS disk.
+	 */
 	@JsonProperty("volume_id")
 	private String volumeId;
-	
+
+	/**
+	 * The flag for forcibly creating a snapshot. The default value is
+	 * false.
+	 * 
+	 * If this parameter is set to false and the disk is in the attaching state, the
+	 * snapshot cannot be forcibly created. If this parameter is set to true and the
+	 * disk is in the attaching state, the snapshot can be forcibly created.
+	 */
 	private Boolean force;
-	
+
+	/**
+	 * The metadata of the EVS snapshot.
+	 */
 	private Map<String, String> metadata;
-	
+
+	/**
+	 * The description of the EVS snapshot. The value can be null. The
+	 * value can contain a maximum of 255 bytes.
+	 */
 	private String description;
-	
+
+	/**
+	 * The name of the EVS snapshot. The value can contain a maximum of
+	 * 255 bytes.
+	 */
 	private String name;
 }

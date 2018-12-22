@@ -27,6 +27,7 @@ import lombok.ToString;
 
 /**
  * Volume snapshot update model
+ * 
  * @author bill
  *
  */
@@ -37,16 +38,34 @@ import lombok.ToString;
 @AllArgsConstructor
 @JsonRootName("snapshot")
 public class SnapshotUpdate implements ModelEntity {
-	
+
 	private static final long serialVersionUID = -8178863629502081753L;
 
+	/**
+	 * The name of the EVS snapshot. The value can contain a maximum of
+	 * 255 bytes.
+	 */
 	private String name;
-	
+
+	/**
+	 * The description of the EVS snapshot. The value can contain a
+	 * maximum of 255 bytes.
+	 */
 	private String description;
-	
+
+	/**
+	 * Specifies also the disk name. You can specify either parameter name or
+	 * display_name. If both parameters are specified, the name value is used. The
+	 * value can contain a maximum of 255 bytes.
+	 */
 	@JsonProperty("display_name")
 	private String displayName;
-	
+
+	/**
+	 * Specifies also the description of the EVS snapshot. You can specify either
+	 * parameter description or display_description. The value can contain a maximum
+	 * of 255 bytes.
+	 */
 	@JsonProperty("display_description")
 	private String displayDescription;
 }

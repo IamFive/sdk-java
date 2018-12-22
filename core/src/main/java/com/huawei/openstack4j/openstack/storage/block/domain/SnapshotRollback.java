@@ -29,6 +29,7 @@ import lombok.ToString;
 
 /**
  * Volume snapshot rollback model
+ * 
  * @author bill
  *
  */
@@ -42,9 +43,16 @@ public class SnapshotRollback implements ModelEntity {
 
 	private static final long serialVersionUID = -1902590267477297525L;
 
+	/**
+	 * The name of the EVS disk to be rolled back. The value can contain a
+	 * maximum of 255 bytes.
+	 */
 	@JsonInclude(Include.NON_NULL)
 	private String name;
 
+	/**
+	 * The UUID of the EVS disk to be rolled back.
+	 */
 	@JsonProperty("volume_id")
 	private String volumeId;
 }

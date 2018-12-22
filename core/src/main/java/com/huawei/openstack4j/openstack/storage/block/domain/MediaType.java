@@ -37,7 +37,13 @@ public class MediaType implements ModelEntity {
 
 	private static final long serialVersionUID = 9029323276764310667L;
 
+	/**
+	 * The response type.
+	 */
 	private String type;
 
+	/**
+	 * The text type.
+	 */
 	private String base;
 }

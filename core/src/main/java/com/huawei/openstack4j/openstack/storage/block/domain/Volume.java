@@ -28,6 +28,7 @@ import lombok.ToString;
 
 /**
  * Volume model
+ * 
  * @author bill
  *
  */
@@ -40,6 +41,12 @@ public class Volume implements ModelEntity {
 
 	private static final long serialVersionUID = -5140670714001601329L;
 
+	/**
+	 * List of volume
+	 * 
+	 * @author bill
+	 *
+	 */
 	@Getter
 	@ToString
 	@Builder
@@ -55,9 +62,18 @@ public class Volume implements ModelEntity {
 		private List<VolumeLink> volumesLinks;
 	}
 
+	/**
+	 * The EVS disk ID.
+	 */
 	private String id;
 
+	/**
+	 * The URI of the disk.
+	 */
 	private List<VolumeLink> links;
 
+	/**
+	 * The EVS disk name. The value can contain a maximum of 255 bytes.
+	 */
 	private String name;
 }

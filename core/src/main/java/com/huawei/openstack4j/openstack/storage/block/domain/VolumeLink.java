@@ -24,6 +24,7 @@ import lombok.ToString;
 
 /**
  * Volume link mode
+ * 
  * @author bill
  *
  */
@@ -34,8 +35,14 @@ import lombok.ToString;
 public class VolumeLink implements ModelEntity {
 
 	private static final long serialVersionUID = -9081696428199451871L;
-	
+
+	/**
+	 * The corresponding shortcut link.
+	 */
 	private String href;
-	
+
+	/**
+	 * The shortcut link marker name.
+	 */
 	private String ref;
 }

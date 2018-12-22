@@ -33,6 +33,7 @@ import lombok.ToString;
 
 /**
  * Volume snapshot detail model
+ * 
  * @author bill
  *
  */
@@ -46,39 +47,80 @@ public class SnapshotDetail implements ModelEntity {
 
 	private static final long serialVersionUID = -8325002507169341310L;
 
+	/**
+	 * The ID of the EVS snapshot.
+	 */
 	private String id;
 
 	/**
+	 * The snapshot status.
+	 * 
 	 * @see <a href=
 	 *      "https://support.huaweicloud.com/en-us/api-evs/en-us_topic_0051803386.html">https://support.huaweicloud.com/en-us/api-evs/en-us_topic_0051803386.html</a>
 	 */
 	private String status;
 
+	/**
+	 * The name of the EVS snapshot.
+	 */
 	private String name;
 
+	/**
+	 * The description of the EVS snapshot.
+	 */
 	private String description;
 
+	/**
+	 * The time when the EVS snapshot was created.
+	 */
 	@JsonProperty("created_at")
 	private String createdAt;
 
+	/**
+	 * The time when the EVS snapshot was updated.
+	 */
 	@JsonProperty("update_at")
 	private String updateAt;
 
+	/**
+	 * The metadata of the EVS snapshot.
+	 * 
+	 * If metadata contains the __system__enableActive field, the snapshot is
+	 * automatically created during the backup of a server.
+	 */
 	private Map<String, String> metadata;
 
+	/**
+	 * The disk to which the snapshot belongs.
+	 */
 	@JsonProperty("volume_id")
 	private String volumeId;
 
+	/**
+	 * The size of the EVS snapshot.
+	 */
 	private Integer size;
 
+	/**
+	 * The tenant ID.
+	 */
 	@JsonInclude(Include.NON_NULL)
 	@JsonProperty("os-extended-snapshot-attributes:project_id")
 	private String projectId;
 
+	/**
+	 * The snapshot creation progress.
+	 */
 	@JsonInclude(Include.NON_NULL)
 	@JsonProperty("os-extended-snapshot-attributes:progress")
 	private String progress;
 
+	/**
+	 * List of snapshot detail
+	 * 
+	 * @author bill
+	 *
+	 */
 	@Getter
 	@ToString
 	@Builder

@@ -29,6 +29,7 @@ import lombok.ToString;
 
 /**
  * Volume version model
+ * 
  * @author bill
  *
  */
@@ -41,22 +42,49 @@ public class Version implements ModelEntity {
 
 	private static final long serialVersionUID = 8734320711608276592L;
 
+	/**
+	 * The minimum API version.
+	 */
 	@JsonProperty("min_version")
 	private String minVersion;
 
+	/**
+	 * The request message type of the API version.
+	 */
 	@JsonProperty("media-types")
 	private List<MediaType> mediaTypes;
 
+	/**
+	 * The URI of the API version.
+	 */
 	private List<VersionLink> links;
 
+	/**
+	 * The ID of the API version.
+	 */
 	private String id;
 
+	/**
+	 * The last time when the API version was updated.
+	 */
 	private String updated;
 
+	/**
+	 * The subversion of the API version.
+	 */
 	private String version;
 
+	/**
+	 * The API version status.
+	 */
 	private String status;
 
+	/**
+	 * List of version
+	 * 
+	 * @author bill
+	 *
+	 */
 	@Getter
 	@ToString
 	@Builder

@@ -27,6 +27,7 @@ import lombok.ToString;
 
 /**
  * Volume metadata model with 'metadata' as name
+ * 
  * @author bill
  *
  */
@@ -36,8 +37,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VolumeMetadata implements ModelEntity {
-	
+
 	private static final long serialVersionUID = -3363776244173691440L;
-	
+
+	/**
+	 * The EVS disk metadata, which is made up of key-value pairs.
+	 */
 	private Map<String, String> metadata;
 }

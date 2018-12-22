@@ -25,6 +25,7 @@ import lombok.ToString;
 
 /**
  * Volume version link model
+ * 
  * @author bill
  *
  */
@@ -37,9 +38,18 @@ public class VersionLink implements ModelEntity {
 
 	private static final long serialVersionUID = 1631324110440394187L;
 
+	/**
+	 * The domain name description.
+	 */
 	private String rel;
 
+	/**
+	 * The domain name.
+	 */
 	private String href;
 
+	/**
+	 * The response type.
+	 */
 	private String type;
 }
